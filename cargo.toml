@@ -17,5 +17,3 @@ resolver = "2" # Important! wgpu/Bevy needs this!
 [dependencies]
 bevy = { version = "0.12.0", features = ["dynamic_linking"] }
 bevy_render = "0.12.0"
-camera_control = { path = "camera_control" }
-common = { path = "common" }
