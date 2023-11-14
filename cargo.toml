@@ -1,7 +1,10 @@
-[package]
-name = "bevy_game"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+resolver = "2" # Important! wgpu/Bevy needs this
+members = [
+    "camera_control",
+    "common",
+    "game",
+]
 
 # Enable a small amount of optimization in debug mode
 [profile.dev]
@@ -11,9 +14,8 @@ opt-level = 1
 [profile.dev.package."*"]
 opt-level = 3
 
-[workspace]
-resolver = "2" # Important! wgpu/Bevy needs this!
-
-[dependencies]
+[workspace.dependencies]
 bevy = { version = "0.12.0", features = ["dynamic_linking"] }
 bevy_render = "0.12.0"
+camera_control = { path = "camera_control" }
+common = { path = "common" }
