@@ -2,6 +2,6 @@
 
 Чтобы запустить нужно из главной директории в терминале прописать
 
-``cargo build
+``cargo build``
 
-cargo run game``
+``cargo run game``
