@@ -1,4 +1,5 @@
 use bevy::{prelude::*,
+    window::{ WindowTheme, PresentMode},
     core_pipeline::Skybox,
     pbr::wireframe::{ WireframeConfig, WireframePlugin}, // можно добавить Wirefarame и NoWireframe к отдельным объектам для выбора рендера
     render::{
@@ -12,6 +13,8 @@ use camera_control::camera_control::CameraControl;
 use common::skybox::Cubemap;
 use common::wireframe::WireframeButton;
 
+use world::voxel_gen::voxel::Voxel;
+
 fn main() {
     App::new()
         .add_plugins((
@@ -20,6 +23,24 @@ fn main() {
                     features: WgpuFeatures::POLYGON_MODE_LINE,
                     ..default()
                 }),
+            })
+            .set(WindowPlugin {
+                primary_window: Some(Window { 
+                    title: "Okno".into(),
+                    resolution: (800., 600.).into(),
+                    present_mode: PresentMode::AutoVsync, // mode: bevy::window::WindowMode::Fullscreen - имплементация фуллскрина и ещё парочки функций с окном
+                    // Tells wasm to resize the window according to the available canvas
+                    fit_canvas_to_parent: true,
+                    // Tells wasm not to override default event handling, like F5, Ctrl+R etc.
+                    prevent_default_event_handling: false,
+                    window_theme: Some(WindowTheme::Dark),
+                    // This will spawn an invisible window
+                    // The window will be made visible in the make_visible() system after 3 frames.
+                    // This is useful when you want to avoid the white window that shows up before the GPU is ready to render the app.
+                    visible: true,
+                    ..default()
+                }),
+                ..default()
             }),
             WireframePlugin,
         ))
@@ -42,16 +63,9 @@ fn setup(
     // wireframe 
     commands.spawn(ButtonBundle::default())
     .insert(WireframeButton);
-    // circular base
+    // Voxel
     commands.spawn(PbrBundle {
-        mesh: meshes.add(shape::Circle::new(4.0).into()),
-        material: materials.add(Color::WHITE.into()),
-        transform: Transform::from_rotation(Quat::from_rotation_x(-std::f32::consts::FRAC_PI_2)),
-        ..default()
-    });
-    // cube
-    commands.spawn(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
+        mesh: meshes.add(Voxel::voxel_generation(Voxel {size: 0.1})),
         material: materials.add(Color::rgb_u8(124, 100, 255).into()),
         transform: Transform::from_xyz(0.0, 0.5, 0.0),
         ..default()

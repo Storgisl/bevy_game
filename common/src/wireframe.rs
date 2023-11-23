@@ -18,7 +18,6 @@ Controls
 ---------------
 Z - Toggle global
 X - Change global color
-C - Change color of the green cube wireframe
 
 WireframeConfig
 -------------

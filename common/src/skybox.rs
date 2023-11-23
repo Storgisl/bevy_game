@@ -23,6 +23,7 @@ impl Cubemap {
     ("textures/Ryfjallet_cubemap_etc2.ktx2", CompressedImageFormats::ETC2),
 ];
     pub const CUBEMAP_SWAP_DELAY: f32 = 3.0;
+    
     pub fn cycle_cubemap_asset(
         time: Res<Time>,
         mut next_swap: Local<f32>,

@@ -4,6 +4,7 @@ members = [
     "camera_control",
     "common",
     "game",
+    "world",
 ]
 
 # Enable a small amount of optimization in debug mode
@@ -19,3 +20,4 @@ bevy = { version = "0.12.0", features = ["dynamic_linking"] }
 bevy_render = "0.12.0"
 camera_control = { path = "camera_control" }
 common = { path = "common" }
+world = { path = "world" }

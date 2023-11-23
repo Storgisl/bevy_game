@@ -1,2 +1,4 @@
 /target
 /run.sh
+/.vs
+Cargo.lock
